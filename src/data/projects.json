@@ -1,5 +1,45 @@
 [
   {
+    "id": 12,
+    "title": "Minimarket Automation System",
+    "description": "Developed a prototype automated mini-market system using vending-machine-style shelving and conveyor-based item delivery. Engineered a scalable control architecture with ESP32, 28BYJ-48 stepper motors, and 74HC595 shift registers to operate multiple dispensing units simultaneously. Integrated ultrasonic sensors and servo actuators for automated item detection and transfer. Implemented Wi-Fi connectivity for real-time communication between embedded devices, databases, and a mobile ordering application.",
+    "images": [],
+    "tags": [
+      "ESP32",
+      "IoT",
+      "Embedded Systems",
+      "Stepper Motor",
+      "74HC595",
+      "Servo Motor",
+      "Ultrasonic Sensor",
+      "Wi-Fi",
+      "Automation"
+    ],
+    "github": null,
+    "demo": null,
+    "featured": true
+  },
+  {
+    "id": 11,
+    "title": "Automated 3D Photogrammetry System with UR5 Robot",
+    "description": "Developed an automated 3D reconstruction pipeline using a UR5 robotic arm for image acquisition and photogrammetric model generation. Programmed robotic motion sequences for multi-view image capture, built Python-based remote robot control software, and integrated NodeODM for processing image datasets into high-quality 3D models. Designed a web-based interface to manage the complete end-to-end scanning and reconstruction workflow.",
+    "images": [],
+    "tags": [
+      "Python",
+      "UR5",
+      "Robotics",
+      "Photogrammetry",
+      "NodeODM",
+      "Computer Vision",
+      "3D Reconstruction",
+      "Web UI",
+      "Automation"
+    ],
+    "github": null,
+    "demo": null,
+    "featured": true
+  },
+  {
     "id": 1,
     "title": "Smart Power System Monitoring with ML",
     "description": "IoT-based power monitoring system using ESP32 and PZEM-004. Architected a full data pipeline: Node-RED as orchestrator → Prometheus time-series DB → Grafana dashboards. Integrated an ML model for automated electrical load classification.",
