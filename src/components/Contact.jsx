@@ -1,11 +1,14 @@
-// src/components/Contact.jsx — Contact section with form and social links
+// src/components/Contact.jsx — Contact form wired to EmailJS → Gmail
+// Keys are read from .env (local) or GitHub Secrets (production).
+// See .env.example for the required variable names.
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import {
   Mail,
   Github,
   Linkedin,
-  Twitter,
   Send,
   CheckCircle,
   AlertCircle,
@@ -16,7 +19,13 @@ import SectionTitle from "./ui/SectionTitle";
 import Button from "./ui/Button";
 import profile from "../data/profile.json";
 
-// Social / contact link cards
+// ─── EmailJS config — values come from .env / GitHub Secrets ─
+// Never hardcode these directly in source code.
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+// ─── Contact sidebar cards ────────────────────────────────────
 const CONTACT_LINKS = [
   {
     icon: <Mail size={22} />,
@@ -48,10 +57,14 @@ const CONTACT_LINKS = [
   },
 ];
 
-// Simple form field component
+// ─── Form field component ─────────────────────────────────────
 function Field({ label, id, type = "text", value, onChange, rows, required }) {
   const base =
-    "w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-body text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-yellow-400 focus:border-transparent transition-all duration-200";
+    "w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 " +
+    "bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-body text-sm " +
+    "placeholder:text-slate-400 dark:placeholder:text-slate-500 " +
+    "focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-yellow-400 " +
+    "focus:border-transparent transition-all duration-200";
 
   return (
     <div className="flex flex-col gap-1.5">
@@ -70,7 +83,7 @@ function Field({ label, id, type = "text", value, onChange, rows, required }) {
           onChange={onChange}
           required={required}
           className={`${base} resize-none`}
-          placeholder={`Enter your ${label.toLowerCase()}...`}
+          placeholder={`Your ${label.toLowerCase()}...`}
         />
       ) : (
         <input
@@ -81,13 +94,16 @@ function Field({ label, id, type = "text", value, onChange, rows, required }) {
           onChange={onChange}
           required={required}
           className={base}
-          placeholder={`Enter your ${label.toLowerCase()}...`}
+          placeholder={`Your ${label.toLowerCase()}...`}
         />
       )}
     </div>
   );
 }
 
+// ═════════════════════════════════════════════════════════════
+// Main section
+// ═════════════════════════════════════════════════════════════
 export default function Contact() {
   const [form, setForm] = useState({
     name: "",
@@ -95,34 +111,76 @@ export default function Contact() {
     subject: "",
     message: "",
   });
-  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const [status, setStatus] = useState("idle"); // 'idle' | 'sending' | 'success' | 'error'
+  const [errMsg, setErrMsg] = useState("");
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
+  // ── Submit: sends via EmailJS → your Gmail inbox ────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
+
+    // Guard: warn in dev if keys are missing
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      console.warn(
+        "[Contact] EmailJS keys not found.\n" +
+          "Add VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, " +
+          "VITE_EMAILJS_PUBLIC_KEY to your .env file.",
+      );
+      setErrMsg("Form not configured yet. Please email me directly.");
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+      return;
+    }
+
     setStatus("sending");
+    setErrMsg("");
 
-    // NOTE: Replace this with your actual form submission logic.
-    // Options: Formspree, EmailJS, Netlify Forms, a custom API endpoint, etc.
-    // Example with Formspree:
-    //   const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(form),
-    //   })
+    try {
+      // These template variables must match what you named them
+      // in your EmailJS template (e.g. {{from_name}}, {{from_email}} …)
+      const templateParams = {
+        from_name: form.name,
+        from_email: form.email,
+        subject: form.subject || "(no subject)",
+        message: form.message,
+        to_name: profile.name, // available in template as {{to_name}}
+      };
 
-    // Simulate network delay for demo purposes
-    await new Promise((r) => setTimeout(r, 1500));
+      const result = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY,
+      );
 
-    // Simulate success (swap with real response check)
-    setStatus("success");
-    setForm({ name: "", email: "", subject: "", message: "" });
+      if (result.status !== 200)
+        throw new Error(`EmailJS status: ${result.status}`);
 
-    // Reset after 4 seconds
-    setTimeout(() => setStatus("idle"), 4000);
+      setStatus("success");
+      setForm({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setStatus("idle"), 6000);
+    } catch (err) {
+      console.error("[Contact] EmailJS error:", err);
+      // Give the user a helpful message
+      const msg = err?.text || err?.message || "";
+      if (msg.includes("invalid") || msg.includes("key")) {
+        setErrMsg("Configuration error. Please contact me directly by email.");
+      } else if (msg.includes("network") || msg.includes("fetch")) {
+        setErrMsg("Network error. Check your connection and try again.");
+      } else {
+        setErrMsg(
+          `Failed to send (${msg || "unknown error"}). Please email me directly.`,
+        );
+      }
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 7000);
+    }
   };
+
+  const isSending = status === "sending";
 
   return (
     <section
@@ -138,7 +196,7 @@ export default function Contact() {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Left — Contact info cards (2/5 width on large screens) */}
+          {/* ── Left: contact info ────────────────────────── */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             <p className="font-body text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-2">
               I'm currently open to new opportunities — freelance, contract, or
@@ -158,10 +216,14 @@ export default function Contact() {
                     href={link.href}
                     target={link.href.startsWith("mailto") ? "_self" : "_blank"}
                     rel="noopener noreferrer"
-                    className={`flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/50 shadow-sm hover:shadow-md group transition-all duration-300 hover:border-${link.color === "blue" ? "blue-400" : "yellow-400"}/60`}
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/50 shadow-sm hover:shadow-md group transition-all duration-300"
                   >
                     <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${link.color === "blue" ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white" : "bg-yellow-100 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 group-hover:bg-yellow-400 group-hover:text-slate-900"} transition-colors duration-300`}
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${
+                        link.color === "blue"
+                          ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white"
+                          : "bg-yellow-100 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 group-hover:bg-yellow-400 group-hover:text-slate-900"
+                      }`}
                     >
                       {link.icon}
                     </div>
@@ -180,7 +242,11 @@ export default function Contact() {
                 ) : (
                   <div className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/50 shadow-sm">
                     <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${link.color === "yellow" ? "bg-yellow-100 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400" : "bg-blue-100 dark:bg-blue-900/30 text-blue-600"}`}
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                        link.color === "yellow"
+                          ? "bg-yellow-100 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400"
+                          : "bg-blue-100 dark:bg-blue-900/30 text-blue-600"
+                      }`}
                     >
                       {link.icon}
                     </div>
@@ -198,7 +264,7 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* Right — Contact form (3/5 width) */}
+          {/* ── Right: form ───────────────────────────────── */}
           <motion.div
             className="lg:col-span-3"
             initial={{ opacity: 0, y: 30 }}
@@ -217,11 +283,11 @@ export default function Contact() {
                 </h3>
               </div>
 
-              {/* Success/Error messages */}
+              {/* Success */}
               {status === "success" && (
                 <motion.div
                   className="flex items-center gap-3 p-4 rounded-2xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 mb-6"
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
                   <CheckCircle
@@ -229,28 +295,38 @@ export default function Contact() {
                     className="text-green-600 flex-shrink-0"
                   />
                   <p className="font-body text-sm text-green-700 dark:text-green-300">
-                    Message sent! I'll get back to you within 24 hours. 🎉
+                    Message sent to my Gmail! I'll get back to you within 24
+                    hours 🎉
                   </p>
                 </motion.div>
               )}
 
+              {/* Error */}
               {status === "error" && (
                 <motion.div
                   className="flex items-center gap-3 p-4 rounded-2xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 mb-6"
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
                   <AlertCircle
                     size={20}
                     className="text-red-600 flex-shrink-0"
                   />
-                  <p className="font-body text-sm text-red-700 dark:text-red-300">
-                    Oops! Something went wrong. Please try emailing directly.
-                  </p>
+                  <div>
+                    <p className="font-body text-sm text-red-700 dark:text-red-300">
+                      {errMsg}
+                    </p>
+                    <a
+                      href={`mailto:${profile.email}`}
+                      className="font-body text-xs text-red-500 dark:text-red-400 underline mt-1 inline-block"
+                    >
+                      {profile.email}
+                    </a>
+                  </div>
                 </motion.div>
               )}
 
-              {/* Form */}
+              {/* Form fields */}
               <form
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-4"
@@ -278,7 +354,6 @@ export default function Contact() {
                   id="subject"
                   value={form.subject}
                   onChange={handleChange}
-                  required
                 />
                 <Field
                   label="Message"
@@ -293,10 +368,10 @@ export default function Contact() {
                   variant="primary"
                   size="md"
                   type="submit"
-                  disabled={status === "sending"}
-                  className={`mt-2 w-full justify-center ${status === "sending" ? "opacity-70 cursor-not-allowed" : ""}`}
+                  disabled={isSending}
+                  className={`mt-2 w-full justify-center ${isSending ? "opacity-70 cursor-not-allowed" : ""}`}
                 >
-                  {status === "sending" ? (
+                  {isSending ? (
                     <>
                       <svg
                         className="animate-spin h-4 w-4"
@@ -317,12 +392,11 @@ export default function Contact() {
                           d="M4 12a8 8 0 018-8v8z"
                         />
                       </svg>
-                      Sending...
+                      Sending to Gmail...
                     </>
                   ) : (
                     <>
-                      <Send size={17} />
-                      Send Message
+                      <Send size={17} /> Send Message
                     </>
                   )}
                 </Button>
