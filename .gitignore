@@ -9,7 +9,6 @@ dist/
 .env.local
 .env.production
 
-.github/workflows/deploy.yml
 
 # OS / editor
 .DS_Store

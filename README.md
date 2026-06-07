@@ -18,54 +18,6 @@ A modern, responsive personal portfolio website built with **React**, **Vite**, 
 
 ---
 
-## 🗂️ Project Structure
-
-```
-portfolio/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          # GitHub Actions CI/CD
-├── public/
-│   ├── favicon.svg
-│   ├── cv.pdf                  # ← Add your CV here
-│   └── images/
-│       ├── profile.jpg         # ← Add your photo here
-│       └── projects/           # ← Add project screenshots
-│           ├── edgevision.jpg
-│           └── ...
-├── src/
-│   ├── components/
-│   │   ├── ui/
-│   │   │   ├── Button.jsx      # Reusable button (3 variants)
-│   │   │   ├── SectionTitle.jsx# Animated section headings
-│   │   │   └── Loader.jsx      # Loading screen
-│   │   ├── Navbar.jsx
-│   │   ├── Hero.jsx
-│   │   ├── About.jsx
-│   │   ├── Skills.jsx
-│   │   ├── Projects.jsx
-│   │   ├── Experience.jsx
-│   │   ├── Contact.jsx
-│   │   └── Footer.jsx
-│   ├── data/                   # ← Edit these to customize content
-│   │   ├── profile.json
-│   │   ├── projects.json
-│   │   ├── skills.json
-│   │   └── experience.json
-│   ├── hooks/
-│   │   ├── useDarkMode.js
-│   │   └── useScrollAnimation.js
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── index.html
-├── vite.config.js
-├── tailwind.config.js
-└── package.json
-```
-
----
-
 ## 🛠️ Setup & Development
 
 ### 1. Clone and install
@@ -91,6 +43,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 All content lives in `src/data/` — edit JSON files, no component changes needed:
 
 ### `profile.json`
+
 ```json
 {
   "name": "Your Name",
@@ -103,15 +56,19 @@ All content lives in `src/data/` — edit JSON files, no component changes neede
 ```
 
 ### `projects.json`
+
 Add new projects as objects in the array. Set `"featured": true` to show the ⭐ badge.
 
 ### `skills.json`
+
 Organize skills by category. Change `"color"` to `"blue"` or `"yellow"`.
 
 ### `experience.json`
+
 Add work (`"type": "work"`) or education (`"type": "education"`) entries.
 
 ### Images
+
 - Profile photo: `public/images/profile.jpg`
 - Project screenshots: `public/images/projects/<name>.jpg`
 - CV: `public/cv.pdf`
@@ -123,11 +80,13 @@ Add work (`"type": "work"`) or education (`"type": "education"`) entries.
 ### Option A — GitHub Actions (recommended, automatic)
 
 1. **Set the base URL** in `vite.config.js`:
+
    ```js
    base: '/your-repo-name/',
    ```
 
 2. **Push to GitHub**:
+
    ```bash
    git add .
    git commit -m "Initial portfolio"
@@ -153,35 +112,37 @@ npm run deploy
 The form is ready — just add your backend. Options:
 
 ### Formspree (easiest)
+
 1. Sign up at [formspree.io](https://formspree.io)
 2. Get your form ID
 3. In `Contact.jsx`, replace the simulated submit with:
 
 ```js
-const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify(form),
-})
-if (res.ok) setStatus('success')
-else setStatus('error')
+});
+if (res.ok) setStatus("success");
+else setStatus("error");
 ```
 
 ### EmailJS
+
 Follow the [EmailJS React guide](https://www.emailjs.com/docs/examples/reactjs/).
 
 ---
 
 ## 🎨 Tech Stack
 
-| Technology    | Purpose                        |
-|---------------|-------------------------------|
-| React 18      | UI framework                  |
-| Vite 5        | Build tool & dev server        |
-| Tailwind CSS 3| Utility-first styling          |
-| Framer Motion | Animations & transitions       |
-| Lucide React  | Icon library                   |
-| GitHub Actions| CI/CD for Pages deployment     |
+| Technology     | Purpose                    |
+| -------------- | -------------------------- |
+| React 18       | UI framework               |
+| Vite 5         | Build tool & dev server    |
+| Tailwind CSS 3 | Utility-first styling      |
+| Framer Motion  | Animations & transitions   |
+| Lucide React   | Icon library               |
+| GitHub Actions | CI/CD for Pages deployment |
 
 ---
 
