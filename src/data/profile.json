@@ -7,11 +7,10 @@
   "focus": [
     "Embedded Firmware (ESP32, STM32, Arduino)",
     "Robotics & Control Systems",
-    "IoT Ecosystem Development",
-    "Edge AI & Machine Learning",
-    "Digital Circuit Design"
+    "Automation and IoT Ecosystem Development",
+    "Edge AI & Machine Learning"
   ],
-  "cv": "/cv.pdf",
+  "cv": "https://docs.google.com/document/d/12Ufbg63_0Z-E9K-TFUU-AYTcE2NBc5cr2PuhyZEL3EE/edit?usp=sharing",
   "profileImage": "images/foto_formal_removebg_preview.png",
   "email": "ahamdfaiqfawwaz@gmail.com",
   "github": "https://github.com/fawzqi",

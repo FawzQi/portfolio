@@ -114,7 +114,7 @@ export default function Skills() {
         >
           Always learning — currently exploring{" "}
           <span className="text-blue-600 dark:text-yellow-400 font-semibold">
-            Rust for Embedded
+            PLC for Automation
           </span>{" "}
           and{" "}
           <span className="text-blue-600 dark:text-yellow-400 font-semibold">

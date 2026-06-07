@@ -16,7 +16,7 @@ const FOCUS_ICONS = {
 // Stats to show at a glance
 const STATS = [
   { value: "2+", label: "Years Experience" },
-  { value: "10+", label: "Projects Built" },
+  { value: "12+", label: "Projects Built" },
   { value: "100+", label: "Students Mentored" },
   { value: "2", label: "National Awards" },
 ];
@@ -57,12 +57,11 @@ export default function About() {
               {profile.about}
             </p>
             <p className="font-body text-slate-500 dark:text-slate-400 leading-relaxed">
-              When I'm not writing firmware, I'm mentoring students in digital
-              circuits and robotics at ITS labs, reading research on real-time
-              systems, or designing custom motion algorithms for the next
-              competition season. I believe great embedded engineering is about
-              discipline, precision, and understanding the hardware at the
-              lowest level.
+              Beside that, I'm also mentoring students in digital circuits and
+              robotics at ITS labs, reading research on real-time systems, or
+              designing custom motion algorithms for the next competition
+              season. I believe great embedded engineering is about discipline,
+              precision, and understanding the hardware at the lowest level.
             </p>
 
             {/* Stats grid */}

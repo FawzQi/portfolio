@@ -1,6 +1,4 @@
 // src/components/Contact.jsx — Contact form wired to EmailJS → Gmail
-// Keys are read from .env (local) or GitHub Secrets (production).
-// See .env.example for the required variable names.
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
@@ -20,7 +18,6 @@ import Button from "./ui/Button";
 import profile from "../data/profile.json";
 
 // ─── EmailJS config — values come from .env / GitHub Secrets ─
-// Never hardcode these directly in source code.
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
@@ -142,11 +139,10 @@ export default function Contact() {
       // These template variables must match what you named them
       // in your EmailJS template (e.g. {{from_name}}, {{from_email}} …)
       const templateParams = {
-        from_name: form.name,
-        from_email: form.email,
+        name: form.name,
+        email: form.email,
         subject: form.subject || "(no subject)",
         message: form.message,
-        to_name: profile.name, // available in template as {{to_name}}
       };
 
       const result = await emailjs.send(
