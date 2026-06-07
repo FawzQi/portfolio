@@ -1,0 +1,50 @@
+[
+  {
+    "category": "Programming Languages",
+    "icon": "Terminal",
+    "color": "blue",
+    "skills": ["C++", "C", "Python", "JavaScript", "TypeScript", "HTML", "CSS"]
+  },
+  {
+    "category": "Microcontrollers & Hardware",
+    "icon": "Cpu",
+    "color": "yellow",
+    "skills": [
+      "ESP32 (ESP-IDF / Arduino)",
+      "FreeRTOS",
+      "Arduino",
+      "Raspberry Pi",
+      "Jetson Nano"
+    ]
+  },
+  {
+    "category": "IoT & Connectivity",
+    "icon": "Globe",
+    "color": "blue",
+    "skills": [
+      "MQTT",
+      "REST API / HTTP",
+      "UART",
+      "I2C",
+      "Node-RED",
+      "Prometheus",
+      "Grafana",
+      "Node.js / Express"
+    ]
+  },
+  {
+    "category": "AI, Vision & Dev Tools",
+    "icon": "Brain",
+    "color": "yellow",
+    "skills": [
+      "OpenCV",
+      "Machine Learning",
+      "Computer Vision",
+      "Git / GitHub",
+      "PlatformIO",
+      "Docker",
+      "VS Code",
+      "AutodeskFusion 360"
+    ]
+  }
+]

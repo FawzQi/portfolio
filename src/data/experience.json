@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "type": "work",
+    "title": "Senior Programmer — VI-ROSE ITS Robotics Team",
+    "organization": "VI-ROSE ITS",
+    "location": "Surabaya, Indonesia",
+    "period": "Feb 2024 – Present",
+    "description": "Architect robotic control systems and motion-planning applications for national dance robot competitions. Engineer the full firmware stack — hardware-software integration, real-time control loops, and a custom motion app — leading the team to 1st Place at both Regional and National levels (KRSTI 2024).",
+    "highlights": [
+      "Architected real-time robotic control system with precise motion planning",
+      "Built a custom user-centric app for robot motion configuration",
+      "Optimized firmware performance through targeted troubleshooting"
+    ],
+    "images": [],
+    "icon": "Cpu"
+  },
+  {
+    "id": 2,
+    "type": "work",
+    "title": "Laboratory Assistant & Practicum Assistant",
+    "organization": "B401 Robotics Laboratory — ITS",
+    "location": "Surabaya, Indonesia",
+    "period": "Mar 2025 – Present",
+    "description": "Dual role: Lab Assistant managing resources and facilitating robotics/embedded systems research, and Practicum Assistant for Digital Circuit and Telematics Workshop courses across three academic terms.",
+    "highlights": [
+      "Mentored 100+ students in digital logic, Boolean optimization, and sequential circuit design",
+      "Led workshops on soldering, PCB design, 3D printing, and embedded firmware",
+      "Served as Digital Circuit Practicum Assistant and Telematics Workshop Assistant across 3 consecutive terms"
+    ],
+    "images": [],
+    "icon": "GraduationCap"
+  },
+  {
+    "id": 3,
+    "type": "work",
+    "title": "Programming Practicum Assistant",
+    "organization": "LAB MIOT (Multimedia and IoT) — ITS",
+    "location": "Surabaya, Indonesia",
+    "period": "Sep 2024 – Dec 2025",
+    "description": "Mentored students in foundational C programming concepts. Collaborated on designing lab exercises to improve algorithmic thinking and logical problem-solving for first-year engineering students.",
+    "highlights": [
+      "Mentored students in foundational C programming and algorithmic thinking",
+      "Supported students in debugging and understanding memory management in C"
+    ],
+    "images": [],
+    "icon": "Brain"
+  },
+  {
+    "id": 4,
+    "type": "education",
+    "title": "B.Sc. Computer Engineering",
+    "organization": "Institut Teknologi Sepuluh Nopember (ITS)",
+    "location": "Surabaya, Indonesia",
+    "period": "2023 – 2027 (Expected)",
+    "description": "Undergraduate Computer Engineering student with a strong focus on embedded systems, digital circuits, and robotics. Active member and Senior Programmer of the VI-ROSE robotics competition team.",
+    "highlights": [
+      "GPA: 3.65 / 4.00",
+      "Senior Programmer — VI-ROSE ITS national competition robotics team",
+      "Laboratory Assistant — B401 Robotics Laboratory",
+      "Relevant coursework: Digital Systems, Embedded Programming, Robotics, Data Structures, IoT"
+    ],
+    "images": [],
+    "icon": "GraduationCap"
+  },
+  {
+    "id": 6,
+    "type": "achievement",
+    "title": "1st Place — National Indonesian Dance Robot Contest",
+    "organization": "KRSTI (Kontes Robot Seni Tari Indonesia)",
+    "location": "Indonesia",
+    "period": "2024",
+    "description": "Secured 1st Place at the National level of KRSTI 2024 as Senior Programmer of VI-ROSE ITS. Responsible for the full robotics firmware stack, motion-planning system, and real-time control architecture.",
+    "highlights": [
+      "Competed against top university robotics teams across Indonesia",
+      "Sole programmer responsible for all motion and control firmware",
+      "Robot executed complex choreography with zero critical failures"
+    ],
+    "images": ["images/WhatsApp Image 2026-04-01 at 22.21.53.jpeg"],
+    "icon": "Trophy"
+  },
+  {
+    "id": 7,
+    "type": "achievement",
+    "title": "1st Place — Regional Indonesian Dance Robot Contest",
+    "organization": "KRSTI (Kontes Robot Seni Tari Indonesia)",
+    "location": "East Java, Indonesia",
+    "period": "2024",
+    "description": "Won 1st Place at the Regional (East Java) level of KRSTI 2024, qualifying VI-ROSE ITS for the national stage with a robust and precise firmware system.",
+    "highlights": [
+      "Qualified the team for the national competition",
+      "Optimized motion precision and system reliability under competition pressure",
+      "First major competition win as Senior Programmer of the team"
+    ],
+    "images": ["images/WhatsApp Image 2026-04-01 at 22.22.14.jpeg"],
+    "icon": "Medal"
+  },
+  {
+    "id": 8,
+    "type": "achievement",
+    "title": "Legacy JavaScript Algorithms & Data Structures",
+    "organization": "freeCodeCamp",
+    "location": "Online",
+    "period": "2024",
+    "description": "Completed the full JavaScript Algorithms and Data Structures certification covering ES6+, functional programming, OOP, and 300+ algorithm challenges.",
+    "highlights": [
+      "Covered ES6+, functional programming, and object-oriented JavaScript",
+      "Representing aproximately 300 hours of work",
+      "Verified: freecodecamp.org/certification/fawzqi/javascript-algorithms-and-data-structures-v8"
+    ],
+    "images": ["images/Screenshot 2026-04-15 062605.png"],
+    "icon": "BadgeCheck"
+  }
+]

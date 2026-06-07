@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "title": "Smart Power System Monitoring with ML",
+    "description": "IoT-based power monitoring system using ESP32 and PZEM-004. Architected a full data pipeline: Node-RED as orchestrator → Prometheus time-series DB → Grafana dashboards. Integrated an ML model for automated electrical load classification.",
+    "images": [],
+    "tags": [
+      "ESP32",
+      "Python",
+      "Node-RED",
+      "Prometheus",
+      "Grafana",
+      "MQTT",
+      "Machine Learning"
+    ],
+    "github": "https://github.com/FawzQi/Power-Monitoring-with-ESP32-and-PZEM004T",
+    "demo": null,
+    "featured": null
+  },
+  {
+    "id": 2,
+    "title": "Home Assistant — Embedded & AI Hub",
+    "description": "Full local-cloud smart home system with Raspberry Pi as the core controller and ESP32 edge nodes. Integrated WISPR AI for high-accuracy voice-command control of appliances and built an ML model for predictive monthly electricity bill estimation.",
+    "images": [],
+    "tags": [
+      "Raspberry Pi",
+      "ESP32",
+      "Python",
+      "Machine Learning",
+      "Wi-Fi",
+      "AI",
+      "IoT"
+    ],
+    "github": null,
+    "demo": null,
+    "featured": null
+  },
+  {
+    "id": 3,
+    "title": "Computer Vision Card Game (AR Math-Puzzle)",
+    "description": "Real-time AR math puzzle using a CV pipeline with HSV masking, perspective warping, and template matching. A multi-threaded C++ engine synchronizes live physical card data as mathematical operators with sub-millisecond latency.",
+    "images": ["images/Screenshot 2026-04-14 185424.png"],
+    "tags": [
+      "Python",
+      "OpenCV",
+      "C++",
+      "Raylib",
+      "Computer Vision",
+      "Multithreading"
+    ],
+    "github": null,
+    "demo": null,
+    "featured": null
+  },
+  {
+    "id": 4,
+    "title": "LED Matrix Handheld Game",
+    "description": "Handheld game on ESP32 with dual-core task distribution for zero-latency gameplay. Uses low-level GPIO register manipulation and NVS for persistent high-score tracking — built on bare ESP-IDF with FreeRTOS.",
+    "images": ["images/Screenshot 2026-04-20 143009.png"],
+    "tags": ["ESP32", "ESP-IDF", "FreeRTOS", "C++", "Embedded"],
+    "github": "https://github.com/FawzQi/Final-Project-Embedded-System",
+    "demo": null,
+    "featured": false
+  },
+  {
+    "id": 5,
+    "title": "Visual Servoing on Quadruped Robot",
+    "description": "Implemented Image-Based Visual Servoing (IBVS) for autonomous position adjustment of a quadruped robot. Achieved precise alignment and distance control for robust autonomous grasping using real-time camera feedback.",
+    "images": ["images/Screenshot 2026-04-14 164838.png"],
+    "tags": ["C++", "OpenCV", "ROS", "Jetson", "Computer Vision"],
+    "github": null,
+    "demo": null,
+    "featured": false
+  },
+  {
+    "id": 6,
+    "title": "DSA Boss Fight Game",
+    "description": "C++ game built as a practical study of data structures. Implemented an Object Pooling Pattern to eliminate runtime memory allocation overhead and optimized CPU cache utilization via contiguous memory structures for complex AI enemy behaviors.",
+    "images": [
+      "images/Screenshot 2026-04-14 160824.png",
+      "images/Screenshot 2026-04-14 160607.png"
+    ],
+    "tags": ["C++", "Raylib", "Data Structures", "Algorithms", "Game Dev"],
+    "github": null,
+    "demo": "https://youtu.be/MtLsqzDRmhY",
+    "featured": false
+  },
+  {
+    "id": 7,
+    "title": "Wall-Avoider Mobile Robot",
+    "description": "Autonomous mobile robot using five ultrasonic sensors for 360° real-time obstacle avoidance. Engineered a differential drive locomotion model for seamless navigation in confined spaces.",
+    "images": ["images/WhatsApp Image 2026-04-20 at 21.26.59.jpeg"],
+    "tags": [
+      "ESP32",
+      "C++",
+      "Ultrasonic Sensors",
+      "L298N",
+      "Robotics",
+      "Embedded"
+    ],
+    "github": null,
+    "demo": null,
+    "featured": false
+  },
+  {
+    "id": 8,
+    "title": "IoT Distance Target Game",
+    "description": "Edge-computing game where an ESP32 handles real-time distance tracking and game logic. Firmware interfaces ultrasonic sensors with a Node.js/Express backend via low-latency data transmission.",
+    "images": [
+      "images/Screenshot 2026-04-20 150719.png",
+      "images/Screenshot 2026-04-20 150733.png",
+      "images/Screenshot 2026-04-20 150744.png"
+    ],
+    "tags": ["ESP32", "C++", "Node.js", "JavaScript", "IoT", "REST API"],
+    "github": "https://github.com/Lusive12/distance_target_game",
+    "demo": null,
+    "featured": false
+  },
+  {
+    "id": 9,
+    "title": "Hardware FSM — 7-Segment Display",
+    "description": "Hardware-based Finite State Machine using 74LS ICs and JK flip-flops displaying a synchronized two-digit sequence (17→37→57→77). Boolean optimization for minimal state transitions; NE555 timer for adjustable clock speed.",
+    "images": [],
+    "tags": ["74LS ICs", "Digital Logic", "JK Flip-flops", "NE555", "Hardware"],
+    "github": null,
+    "demo": null,
+    "featured": false
+  },
+  {
+    "id": 10,
+    "title": "Automatic Sorting Robot ARM",
+    "description": "Autonomous sorting system using a robot arm with ultrasonic and TCS color sensors for real-time object classification and pick-and-place. Programmed complete detection, classification, and actuation pipeline.",
+    "images": [
+      "images/Screenshot 2026-04-20 141330.png",
+      "images/Screenshot 2026-04-20 141514.png"
+    ],
+    "tags": ["Robotics", "C++", "TCS3200", "Ultrasonic", "Servo Control"],
+    "github": null,
+    "demo": null,
+    "featured": false
+  }
+]
