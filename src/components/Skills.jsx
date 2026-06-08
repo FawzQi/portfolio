@@ -93,7 +93,7 @@ export default function Skills() {
         <SectionTitle
           label="Skills"
           title="Technologies I Work With"
-          subtitle="Ordered by proficiency — the ★ chip in each category is my strongest tool."
+          subtitle="Proficient in a wide range of tools and technologies across embedded systems, robotics, automation, and AI."
           align="center"
         />
 

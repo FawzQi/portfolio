@@ -236,7 +236,7 @@ export default function Hero() {
               <img
                 src={profile.profileImage}
                 alt={profile.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
                 onError={(e) => {
                   // Fallback to initials avatar if image fails to load
                   e.currentTarget.style.display = "none";

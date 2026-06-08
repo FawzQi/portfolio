@@ -30,13 +30,13 @@ function ProjectCard({ project, index }) {
       transition={{ duration: 0.4, delay: index * 0.08 }}
       layout
     >
-      {/* Featured badge */}
+      {/* Featured badge
       {project.featured && (
         <div className="absolute top-3 left-3 z-10 flex items-center gap-1 px-2.5 py-1 bg-yellow-400 rounded-full text-slate-900 font-display font-bold text-xs shadow-lg">
           <Star size={10} fill="currentColor" />
           Featured
         </div>
-      )}
+      )} */}
 
       {/* ── Thumbnail / Gallery ─────────────────────────────── */}
       <div className="relative">
