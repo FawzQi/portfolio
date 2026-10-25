@@ -1,9 +1,9 @@
 {
   "name": "Ahmad Faiq Fawwaz",
   "title": "Embedded Systems & Robotics Engineer",
-  "tagline": "Bridging hardware and intelligence — from firmware to field robots.",
-  "description": "Computer Engineering student at ITS with 2+ years of hands-on experience in Robotics and Embedded Systems. I architect robotic control systems, build IoT ecosystems, and integrate AI on edge hardware.",
-  "about": "I'm a Computer Engineering student at Institut Teknologi Sepuluh Nopember (ITS) with deep experience in embedded firmware, robotics control systems, and IoT development. As Senior Programmer for VI-ROSE ITS, I architect real-time motion-planning systems that compete — and win — at the national level. I love the challenge of squeezing intelligence out of constrained hardware, whether that's a dual-core ESP32 or a Raspberry Pi at the edge.",
+  "tagline": "Firmware, real-time control, and robotics systems.",
+  "description": "Computer Engineering student at ITS with practical experience in robotics firmware and embedded devices. Former Senior Programmer at VI-ROSE ITS.",
+  "about": "I study Computer Engineering at Institut Teknologi Sepuluh Nopember (ITS), working on embedded firmware, robotics control, and IoT devices. As former Senior Programmer for the VI-ROSE ITS robotics team, I wrote the motion-planning and control software that won 1st place at KRSTI 2024 at regional and national levels. Most of my work involves writing low-level code for microcontrollers such as the ESP32 and STM32.",
   "focus": [
     "Embedded Firmware (ESP32, STM32, Arduino)",
     "Robotics & Control Systems",

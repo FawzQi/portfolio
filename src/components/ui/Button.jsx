@@ -1,12 +1,6 @@
-// src/components/ui/Button.jsx — Reusable button with variants
+// src/components/ui/Button.jsx — Polished button component adhering to Design System
 import React from 'react'
 
-/**
- * Button component
- * @param {string} variant - 'primary' | 'secondary' | 'outline'
- * @param {string} size    - 'sm' | 'md' | 'lg'
- * @param {string} href    - If provided, renders as an <a> tag
- */
 export default function Button({
   children,
   variant = 'primary',
@@ -16,39 +10,31 @@ export default function Button({
   className = '',
   ...props
 }) {
-  // Base styles shared by all variants
   const base =
-    'inline-flex items-center gap-2 font-display font-semibold rounded-xl ' +
-    'transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ' +
-    'cursor-pointer select-none'
+    'inline-flex items-center justify-center gap-2 font-display font-semibold rounded-lg ' +
+    'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ' +
+    'cursor-pointer select-none text-center'
 
-  // Size styles
   const sizes = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg',
+    sm: 'px-3 py-1.5 text-xs min-h-[36px]',
+    md: 'px-5 py-2.5 text-sm min-h-[44px]',
+    lg: 'px-6 py-3 text-base min-h-[48px]',
   }
 
-  // Variant styles
   const variants = {
-    // Solid blue button — primary CTA
     primary:
-      'bg-blue-600 text-white hover:bg-blue-700 active:scale-95 ' +
-      'focus:ring-blue-500 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40',
-    // Yellow accent button — secondary CTA
+      'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 ' +
+      'focus:ring-sky-500 shadow-sm',
     secondary:
-      'bg-yellow-400 text-slate-900 hover:bg-yellow-300 active:scale-95 ' +
-      'focus:ring-yellow-400 shadow-lg shadow-yellow-400/25 hover:shadow-yellow-400/40',
-    // Outlined/ghost button
+      'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 ' +
+      'focus:ring-slate-400 border border-slate-200 dark:border-slate-700',
     outline:
-      'border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white ' +
-      'dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-600 dark:hover:text-white ' +
-      'active:scale-95 focus:ring-blue-500',
+      'border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 ' +
+      'hover:border-slate-400 dark:hover:border-slate-600 focus:ring-sky-500 bg-transparent',
   }
 
   const classes = `${base} ${sizes[size]} ${variants[variant]} ${className}`
 
-  // Render as anchor if href is provided
   if (href) {
     return (
       <a href={href} className={classes} {...props}>

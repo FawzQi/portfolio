@@ -1,306 +1,172 @@
-// src/components/Hero.jsx — Full-screen hero with geometric background, animated intro
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+// src/components/Hero.jsx — Industrial Telemetry Hero
+import React from "react";
 import {
-  ArrowDown,
   Download,
   Mail,
   Github,
   Linkedin,
   MapPin,
 } from "lucide-react";
-import Button from "./ui/Button";
 import profile from "../data/profile.json";
 
-// Staggered animation helper
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: "easeOut", delay },
-  }),
-};
-
-// Titles to cycle through (typewriter effect)
-const TITLES = [
-  "Embedded Systems Engineer",
-  "Robotics Programmer",
-  "IoT Developer",
-  "Firmware Architect",
-];
-
 export default function Hero() {
-  const [titleIndex, setTitleIndex] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  // Typewriter effect
-  useEffect(() => {
-    const current = TITLES[titleIndex];
-    let timeout;
-
-    if (!isDeleting && displayed === current) {
-      // Pause before deleting
-      timeout = setTimeout(() => setIsDeleting(true), 2200);
-    } else if (isDeleting && displayed === "") {
-      // Move to next title
-      setIsDeleting(false);
-      setTitleIndex((prev) => (prev + 1) % TITLES.length);
-    } else {
-      // Type or delete one character
-      const speed = isDeleting ? 45 : 90;
-      timeout = setTimeout(() => {
-        setDisplayed((prev) =>
-          isDeleting ? prev.slice(0, -1) : current.slice(0, prev.length + 1),
-        );
-      }, speed);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, isDeleting, titleIndex]);
-
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-slate-900"
+      className="relative min-h-[92vh] flex items-center pt-24 pb-16 bg-slate-50 dark:bg-[#0B0F17] text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-800/80"
     >
-      {/* ── Background Geometry ── */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Large blue circle — top right */}
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-blue-600/5 dark:bg-blue-600/10" />
-        {/* Yellow blob — bottom left */}
-        <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full bg-yellow-400/10 dark:bg-yellow-400/8" />
-        {/* Grid dots pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.025] dark:opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, #2563EB 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        {/* Decorative rings */}
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full border border-blue-200/30 dark:border-blue-800/30" />
-        <div className="absolute top-1/4 right-1/4 w-48 h-48 rounded-full border border-yellow-400/20 dark:border-yellow-600/20 m-8" />
-      </div>
+      {/* Precision Grid Background */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.035] dark:opacity-[0.05]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+        aria-hidden="true"
+      />
 
-      {/* ── Main Content ── */}
-      <div className="section-container w-full pt-24 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-        {/* Left — Text Content */}
-        <div className="flex flex-col gap-6 order-2 lg:order-1">
-          {/* Location badge */}
-          <motion.div
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0.1}
-          >
-            <span className="inline-flex items-center gap-1.5 text-xs font-display font-semibold text-slate-500 dark:text-slate-400 tracking-widest uppercase">
-              <MapPin size={13} className="text-blue-500" />
+      <div className="section-container w-full relative z-10">
+        {/* Telemetry Header Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-10 border-b border-slate-200 dark:border-slate-800 font-mono text-xs text-slate-500 dark:text-slate-400">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              STATUS: AVAILABLE FOR HIRE
+            </span>
+            <span className="text-slate-300 dark:text-slate-700">|</span>
+            <span className="flex items-center gap-1.5">
+              <MapPin size={12} className="text-sky-500" />
               {profile.location}
             </span>
-          </motion.div>
-
-          {/* Main heading */}
-          <div>
-            <motion.h1
-              className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl leading-[1.1] text-slate-900 dark:text-white"
-              variants={fadeUpVariants}
-              initial="hidden"
-              animate="visible"
-              custom={0.2}
-            >
-              Hi, I'm{" "}
-              <span className="relative">
-                <span className="text-blue-600 dark:text-yellow-400">
-                  {profile.name.split(" ")[0]}
-                </span>
-                {/* Yellow underline decoration */}
-                <motion.span
-                  className="absolute -bottom-2 left-0 h-1 bg-yellow-400 rounded-full"
-                  initial={{ width: 0 }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-                />
-              </span>
-            </motion.h1>
-
-            {/* Typewriter title */}
-            <motion.div
-              className="mt-4 h-10 flex items-center gap-2"
-              variants={fadeUpVariants}
-              initial="hidden"
-              animate="visible"
-              custom={0.35}
-            >
-              <span className="font-display font-semibold text-xl md:text-2xl text-slate-500 dark:text-slate-400">
-                {displayed}
-              </span>
-              <span className="w-0.5 h-6 bg-blue-600 dark:bg-yellow-400 animate-blink rounded-full" />
-            </motion.div>
           </div>
 
-          {/* Short description */}
-          <motion.p
-            className="font-body text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-lg"
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0.45}
-          >
-            {profile.description}
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-wrap gap-3 mt-2"
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0.55}
-          >
-            <Button
-              variant="primary"
-              href={`mailto:${profile.email}`}
-              size="md"
-            >
-              <Mail size={18} />
-              Contact Me
-            </Button>
-            <Button
-              variant="secondary"
-              href={profile.cv}
-              target="_blank"
-              rel="noopener noreferrer"
-              size="md"
-            >
-              <Download size={18} />
-              Download CV
-            </Button>
-          </motion.div>
-
-          {/* Social links */}
-          <motion.div
-            className="flex items-center gap-4 mt-1"
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0.65}
-          >
-            <span className="text-xs font-body text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-              Find me on
+          <div className="flex items-center gap-4">
+            <span>DISCIPLINE: EMBEDDED_ROBOTICS</span>
+            <span className="text-slate-300 dark:text-slate-700">|</span>
+            <span className="text-amber-600 dark:text-amber-400 font-semibold">
+              VI-ROSE ITS (2024–2026)
             </span>
-            <div className="flex gap-3">
-              {[
-                {
-                  href: profile.github,
-                  icon: <Github size={18} />,
-                  label: "GitHub",
-                },
-                {
-                  href: profile.linkedin,
-                  icon: <Linkedin size={18} />,
-                  label: "LinkedIn",
-                },
-              ].map(({ href, icon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-blue-500 hover:text-blue-600 dark:hover:border-yellow-400 dark:hover:text-yellow-400 transition-all duration-200 hover:scale-110"
-                >
-                  {icon}
-                </a>
-              ))}
-            </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Right — Profile Image */}
-        <motion.div
-          className="flex justify-center lg:justify-end order-1 lg:order-2"
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-        >
-          <div className="relative">
-            {/* Decorative rings behind image */}
-            <div className="absolute inset-0 rounded-full border-2 border-dashed border-blue-300/40 dark:border-blue-600/30 scale-110 animate-[spin_30s_linear_infinite]" />
-            <div className="absolute inset-0 rounded-full border-2 border-yellow-400/30 scale-125" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column: Direct Credentials & Bio */}
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-widest text-sky-600 dark:text-sky-400 font-semibold mb-2">
+                {profile.title}
+              </p>
+              <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] text-slate-900 dark:text-white">
+                {profile.name}
+              </h1>
+            </div>
 
-            {/* Profile Image container */}
-            <div className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl shadow-blue-500/20 dark:shadow-blue-900/40">
-              <img
-                src={profile.profileImage}
-                alt={profile.name}
-                className="w-full h-full object-cover object-top"
-                onError={(e) => {
-                  // Fallback to initials avatar if image fails to load
-                  e.currentTarget.style.display = "none";
-                  e.currentTarget.nextSibling.style.display = "flex";
-                }}
-              />
-              {/* Fallback initials avatar */}
-              <div
-                className="hidden w-full h-full items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800 text-white font-display font-black text-5xl"
-                style={{ display: "none" }}
-              >
-                {profile.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
+            <p className="font-body text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-xl">
+              {profile.description}
+            </p>
+
+            {/* Spec Matrix from profile.json */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 font-mono text-xs">
+              <div>
+                <p className="text-slate-400 text-[10px] uppercase tracking-wider">PRIMARY HARDWARE</p>
+                <p className="font-semibold text-slate-800 dark:text-slate-200 mt-0.5">ESP32 · STM32 · Arduino</p>
+              </div>
+              <div>
+                <p className="text-slate-400 text-[10px] uppercase tracking-wider">ROBOTICS DOMAIN</p>
+                <p className="font-semibold text-slate-800 dark:text-slate-200 mt-0.5">Control & Motion</p>
+              </div>
+              <div>
+                <p className="text-slate-400 text-[10px] uppercase tracking-wider">ACADEMIC BASE</p>
+                <p className="font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5">ITS Computer Eng</p>
               </div>
             </div>
 
-            {/* Floating badge — yellow */}
-            {/* <motion.div
-              className="absolute -bottom-4 -right-4 sm:bottom-2 sm:right-0 px-4 py-2 bg-yellow-400 rounded-2xl shadow-lg shadow-yellow-400/30"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.5 }}
-            >
-              <p className="font-display font-bold text-sm text-slate-900 whitespace-nowrap">
-                {/* 🏆 National Champion */}
-            {/* </p> */}
-            {/* </motion.div> */}
+            {/* Direct Action Buttons with 44px min-height */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <a
+                href={profile.cv}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-display font-semibold text-sm hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors shadow-sm"
+              >
+                <Download size={16} />
+                Download CV
+              </a>
 
-            {/* Floating badge — blue */}
-            {/* <motion.div
-              className="absolute -top-4 -left-4 sm:top-4 sm:left-0 px-3 py-1.5 bg-blue-600 rounded-xl shadow-lg shadow-blue-500/30"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.5 }}
-            >
-              <p className="font-display font-bold text-xs text-white">
-                {/* GPA 3.65 / 4.00 */}
-            {/* </p>  */}
-            {/* </motion.div> */}
+              <a
+                href={`mailto:${profile.email}`}
+                className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-display font-semibold text-sm hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+              >
+                <Mail size={16} />
+                {profile.email}
+              </a>
+
+              <div className="flex items-center gap-2 ml-auto sm:ml-0">
+                <a
+                  href={profile.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="w-11 h-11 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+                >
+                  <Github size={18} />
+                </a>
+                <a
+                  href={profile.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="w-11 h-11 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+                >
+                  <Linkedin size={18} />
+                </a>
+              </div>
+            </div>
           </div>
-        </motion.div>
-      </div>
 
-      {/* ── Scroll Down Indicator ── */}
-      <motion.a
-        href="#about"
-        aria-label="Scroll to About section"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-yellow-400 transition-colors"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 6, 0] }}
-        transition={{
-          delay: 1.5,
-          duration: 1.8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <span className="text-xs font-body tracking-widest uppercase">
-          Scroll
-        </span>
-        <ArrowDown size={16} />
-      </motion.a>
+          {/* Right Column: Verified Hardware Spec & Visual Telemetry */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-end">
+            <div className="relative w-full max-w-sm rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
+              {/* Corner crosshairs */}
+              <span className="absolute -top-1.5 -left-1.5 font-mono text-xs text-slate-400 dark:text-slate-600 select-none">+</span>
+              <span className="absolute -top-1.5 -right-1.5 font-mono text-xs text-slate-400 dark:text-slate-600 select-none">+</span>
+              <span className="absolute -bottom-1.5 -left-1.5 font-mono text-xs text-slate-400 dark:text-slate-600 select-none">+</span>
+              <span className="absolute -bottom-1.5 -right-1.5 font-mono text-xs text-slate-400 dark:text-slate-600 select-none">+</span>
+
+              {/* Photo */}
+              <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800/80 mb-4">
+                <img
+                  src={profile.profileImage}
+                  alt={profile.name}
+                  width="384"
+                  height="384"
+                  className="w-full h-full object-cover object-top filter grayscale contrast-105 hover:grayscale-0 transition-all duration-500"
+                />
+                <div className="absolute top-2 left-2 px-2 py-1 bg-slate-900/80 backdrop-blur-sm text-[10px] font-mono text-slate-300 rounded border border-slate-700">
+                  ITS // SURABAYA
+                </div>
+              </div>
+
+              {/* Telemetry rows - strictly from experience.json */}
+              <div className="space-y-2 font-mono text-xs">
+                <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800/60">
+                  <span className="text-slate-400">ROLE</span>
+                  <span className="font-semibold text-slate-700 dark:text-slate-200">Senior Programmer (2024–2026)</span>
+                </div>
+                <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800/60">
+                  <span className="text-slate-400">TEAM</span>
+                  <span className="font-semibold text-slate-700 dark:text-slate-200">VI-ROSE ITS</span>
+                </div>
+                <div className="flex justify-between items-center py-1">
+                  <span className="text-slate-400">NATIONAL RESULT</span>
+                  <span className="font-semibold text-amber-600 dark:text-amber-400">1st Place KRSTI 2024</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

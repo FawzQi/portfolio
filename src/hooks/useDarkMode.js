@@ -1,22 +1,26 @@
-// src/hooks/useDarkMode.js — Custom hook to manage dark/light mode`
+// src/hooks/useDarkMode.js — Custom hook to manage dark/light mode
 import { useState, useEffect } from "react";
 
 export function useDarkMode() {
-  // Check localStorage first, then system preference
+  // Check localStorage first, then system preference (default dark for industrial theme)
   const [isDark, setIsDark] = useState(() => {
-    const stored = localStorage.getItem("theme");
-    if (stored) return stored === "light";
-    return window.matchMedia("(prefers-color-scheme: light)").matches;
+    try {
+      const stored = localStorage.getItem("theme");
+      if (stored) return stored === "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    } catch {
+      return true;
+    }
   });
 
   useEffect(() => {
     const root = document.documentElement;
     if (isDark) {
       root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      try { localStorage.setItem("theme", "dark"); } catch {}
     } else {
       root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      try { localStorage.setItem("theme", "light"); } catch {}
     }
   }, [isDark]);
 

@@ -1,9 +1,8 @@
-// src/App.jsx — Root component: wires up dark mode, loader, and all sections
-import React, { useState, useEffect } from 'react'
+// src/App.jsx — Root component without artificial loader delay
+import React from 'react'
 import { useDarkMode } from './hooks/useDarkMode'
 
 // Layout components
-import Loader     from './components/ui/Loader'
 import Navbar     from './components/Navbar'
 import Footer     from './components/Footer'
 
@@ -18,21 +17,9 @@ import Contact    from './components/Contact'
 export default function App() {
   const { isDark, toggle } = useDarkMode()
 
-  // Show loading screen briefly on first mount
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    // Simulate a short loading window (300ms for fonts/assets to settle)
-    const timer = setTimeout(() => setIsLoading(false), 1200)
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
-    <>
-      {/* Loading screen — AnimatePresence handles exit animation */}
-      <Loader isLoading={isLoading} />
-
-      {/* Sticky navigation */}
+    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white selection:bg-sky-500 selection:text-white">
+      {/* Sticky telemetry navigation */}
       <Navbar isDark={isDark} onToggleDark={toggle} />
 
       {/* Main content */}
@@ -47,6 +34,6 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
-    </>
+    </div>
   )
 }

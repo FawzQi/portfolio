@@ -32,8 +32,9 @@ export default {
       },
       // Custom fonts loaded via Google Fonts in index.html
       fontFamily: {
-        display: ['Syne', 'sans-serif'],  // Headings — distinctive, geometric
-        body:    ['DM Sans', 'sans-serif'], // Body — clean, readable
+        display: ['"Space Grotesk"', 'sans-serif'],
+        body:    ['Inter', 'system-ui', 'sans-serif'],
+        mono:    ['"JetBrains Mono"', 'monospace'],
       },
       // Smooth animation durations
       transitionDuration: {
